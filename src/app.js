@@ -40,13 +40,7 @@ app.post('/trans', async (req, res) => {
 //setup api get data from thesieutoc.net
 app.post('/thesieutoc', (req, res) => {
     
-    const rawdata = fs.readFileSync(path.join(__dirname, '../_storage.json')).toString()
-    const data = JSON.parse(rawdata)
-
-    console.log(data)
-    
-    
-    fs.writeFile(path.join(__dirname, '../_storage.json'), JSON.stringify(req.body) , (e) => {
+    fs.writeFile(path.join(__dirname, '../_storage.txt'), req.body , (e) => {
         if (e) throw e
         console.log('written to file')
     })
@@ -55,9 +49,8 @@ app.post('/thesieutoc', (req, res) => {
 
 // GET request to get the data from _storage.json
 app.get('/data', (req, res) => {
-    const rawdata = fs.readFileSync(path.join(__dirname, '../_storage.json')).toString()
-    const data = JSON.parse(rawdata)
-
+    const data = fs.readFileSync(path.join(__dirname, '../_storage.txt')).toString()
+    
     res.send(data)
 })
 
