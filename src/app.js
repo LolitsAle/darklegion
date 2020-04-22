@@ -4,6 +4,7 @@ const hbs = require('hbs')
 const charger = require('../utils/chargeapi')
 const { exPort } = require('../webconfig.json')
 const fs = require('fs')
+const bodyParser = require('body-parser')
 
 
 const app = express()
@@ -15,7 +16,7 @@ const viewPath = path.join(__dirname, '../templates/views')
 const partialPath = path.join(__dirname, '../templates/partials')
 
 //setup handlebars engine and views location
-app.use(express.json())
+app.use(bodyParser.json())
 app.set('views', viewPath)
 app.set('view engine', 'hbs')
 hbs.registerPartials(partialPath)
@@ -31,6 +32,8 @@ app.post('/trans', async (req, res) => {
     const price = req.query.price
     const seri = req.query.seri
     const code = req.query.code
+
+    console.log(card)
 
     charger(code , seri, card, price, 'just testing' , (err, data) =>{
         res.send(JSON.parse(data)) 
