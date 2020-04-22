@@ -51,16 +51,22 @@ app.post('/thesieutoc', (req, res) => {
     
     fs.writeFile(path.join(__dirname, '../_storage.json'), JSON.stringify(data) , (e) => {
         if (e) throw e
-        console.log('written to file')
+    })
+
+    fs.writeFile(path.join(__dirname, '../info.txt'), 'api called' , (e) => {
+        if (e) throw e
     })
     res.status(200).send()
 })
 
 // GET request to get the data from _storage.json
 app.get('/data', (req, res) => {
-    const data = fs.readFileSync(path.join(__dirname, '../_storage.json')).toString()
+    const rawdata = fs.readFileSync(path.join(__dirname, '../_storage.json')).toString()
+    const info = fs.readFileSync(path.join(__dirname, '../info.txt')).toString()
     
-    res.send(data)
+    const data = JSON.parse(rawdata)
+
+    res.send({data ,info})
 })
 
 app.get('/', (req, res) => {
