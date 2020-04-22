@@ -17,6 +17,7 @@ const partialPath = path.join(__dirname, '../templates/partials')
 
 //setup handlebars engine and views location
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 app.set('views', viewPath)
 app.set('view engine', 'hbs')
 hbs.registerPartials(partialPath)
@@ -47,7 +48,7 @@ app.post('/thesieutoc', (req, res) => {
     data.headers = req.headers
     data.query = req.query
 
-    console.log(data)
+    console.log(req)
     
     fs.writeFile(path.join(__dirname, '../_storage.json'), JSON.stringify(data) , (e) => {
         if (e) throw e
