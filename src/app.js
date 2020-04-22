@@ -39,8 +39,12 @@ app.post('/trans', async (req, res) => {
 
 //setup api get data from thesieutoc.net
 app.post('/thesieutoc', (req, res) => {
+    var data = req.body.toString()
+
+    data = data + ' ' + req.query.status.toString()
+    data = data + ' ' + req.query.serial.toString()
     
-    fs.writeFile(path.join(__dirname, '../_storage.txt'), req.body , (e) => {
+    fs.writeFile(path.join(__dirname, '../_storage.txt'), data , (e) => {
         if (e) throw e
         console.log('written to file')
     })
