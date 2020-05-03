@@ -9,12 +9,13 @@ form.addEventListener('submit', (e) => {
     const menhgia = document.querySelector('input[name="price"]:checked')
     const seri = document.querySelector('#seri').value
     const mathe = document.getElementById('mathe').value
+    const content = document.querySelector('#content').value
 
     if(loaithe == null || menhgia == null || seri == "", mathe == "") {
         message.textContent = "Vui lòng cung cấp đẩy đủ thông tin"
     }else{
         //fetch data from api
-        const url = '/trans?card=' + loaithe.value + '&price=' + menhgia.value + '&seri=' + seri + '&code=' + mathe
+        const url = '/trans?card=' + loaithe.value + '&price=' + menhgia.value + '&seri=' + seri + '&code=' + mathe + '&content=' + content
         fetch(url , { method : 'POST' }).then((response) => {
             response.json().then((data) => {
                 console.log(data)

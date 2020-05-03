@@ -1,4 +1,5 @@
 {
     "apiKey" : "15873964092098142717",
-    "exPort" : 3000
+    "exPort" : 3000,
+    "pointsfactor" : 0.1
 }
